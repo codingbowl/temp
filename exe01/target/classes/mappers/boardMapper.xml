@@ -25,7 +25,7 @@
 
 	<update id="update">
 		update tbl_board set title = #{title}, content =
-		#{content}
+		#{content}, writer = #{writer}
 		where bno = #{bno}
 	</update>
 
@@ -41,6 +41,30 @@
 	tbl_board
 	where bno > 0
 	order by bno desc, reg_date desc
+	]]>
+	</select>
+	
+	<select id="listPage" resultType="BoardVO">
+	<![CDATA[
+	select
+	bno, title, content, writer, reg_date, viewcnt
+	from
+	tbl_board
+	where bno > 0
+	order by bno desc, reg_date desc
+	limit #{page}, 10
+	]]>
+	</select>
+	
+	<select id="listCriteria" resultType="BoardVO">
+	<![CDATA[
+	select
+	bno, title, content, writer, reg_date, viewcnt
+	from
+	tbl_board
+	where bno > 0
+	order by bno desc, reg_date desc
+	limit #{pageStart}, #{perPageNum}
 	]]>
 	</select>
 
